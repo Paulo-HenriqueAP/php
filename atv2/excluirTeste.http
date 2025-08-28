@@ -1,0 +1,6 @@
+DELETE http://localhost/atv2/excluir.php
+Content-Type: application/json
+
+{
+    "email": "paulo7tor@example.com"
+}

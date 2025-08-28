@@ -1,7 +1,7 @@
 <?php
     $server = "localhost";
     $user = "root";
-    $password = "#msql";
+    $password = "";
     $db = "api_aula2";
 
     $conn = new mysqli($server, $user, $password, $db);

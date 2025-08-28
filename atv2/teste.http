@@ -2,9 +2,9 @@ POST http://localhost/atv2/api.php
 
 {
     "nome": "Paulo Pereira",
-    "email": "paulo.tor@example.com",
-    "senha": "senha123",
-    "telefone": "123456789",
+    "email": "paulo7tor@example.com",
+    "senha": "#Senha123",
+    "telefone": "12345678900",
     "endereco": "Rua A, 123",
     "nascimento": "2002-01-01"
 }

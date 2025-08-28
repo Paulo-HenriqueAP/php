@@ -1,14 +1,14 @@
-CREATE DATABASE api_aula2;
+CREATE DATABASE IF NOT EXISTS api_aula2;
 USE api_aula2;
 
-CREATE TABLE api_usuarios(
-id int auto_increment primary key,
-nome varchar(100) not null,
-email varchar(150) not null unique,
-senha varchar(255) not null,
-telefone varchar(200) not null,
-endereco varchar(100) not null,
-estado char(2) not null,
-data_nascimento date not null,
-criacao timestamp default current_timestamp
-);
+CREATE TABLE api_usuarios (
+  id CHAR(36) PRIMARY KEY DEFAULT (UUID()),
+  nome VARCHAR(100) NOT NULL,
+  email VARCHAR(150) NOT NULL UNIQUE,
+  senha VARCHAR(255) NOT NULL,
+  telefone VARCHAR(200) NOT NULL,
+  endereco VARCHAR(100) NOT NULL,
+  estado CHAR(2) NOT NULL,
+  data_nascimento DATE NOT NULL,
+  criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE='utf8_general_ci';

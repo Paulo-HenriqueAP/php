@@ -1,5 +1,7 @@
 <?php
 include "conexao.php";
+include "senhaSegura.php";
+
 
 header("Content-type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Origin: *");
@@ -13,6 +15,22 @@ $method = $_SERVER["REQUEST_METHOD"];
 
 if ($method == "POST") {
     $data = json_decode(file_get_contents("php://input"), true);
+
+    if (isset($data["telefone"]) && strlen($data["telefone"]) < 11) {
+        echo "O telefone tem menos de 11 caracteres.";
+        exit();
+    }
+
+    if (isset($data["email"]) && !filter_var($data["email"], FILTER_VALIDATE_EMAIL)) {
+        echo "E-mail inválido.";
+        exit();
+    }
+
+    if (!validarSenhaForte($data["senha"] ?? '')) {
+        echo "Senha inválida ou não fornecida. Revise!";
+        exit();
+    }
+
 
     if (
         isset($data["nome"]) &&
@@ -40,6 +58,9 @@ if ($method == "POST") {
             $id = $conn->insert_id;
             $result = $conn->query("SELECT * FROM api_usuarios WHERE id = $id");
             $cliente = $result->fetch_assoc();
+
+            var_dump($cliente);
+
             http_response_code(201);
             echo json_encode(["mensagem" => "Tudo certo! Cliente cadastrado.", "cliente" => $cliente], JSON_UNESCAPED_UNICODE);
         } else {
